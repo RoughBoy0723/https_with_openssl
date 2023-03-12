@@ -66,28 +66,29 @@ void* requset_handler(void *arg)
 		clnt_write = fdopen(dup(clnt_sock), "w");
 		fgets(req_line, SMALL_BUF, clnt_read);
 		
-		if(strstr(req_line,"HTTP/") == NULL)
-		{
-				send_error(clnt_write);
-				fclose(clnt_read);
-				fclose(clnt_write);
-				return;
-		}
+		if(strstr(req_line, "HTTP/")==NULL)
+        {
+                send_error(clnt_write);
+                fclose(clnt_read);
+                fclose(clnt_write);
+                return 0; 
+        }
 
-		strcpy(method, strtok(req_line, " /"));
-		strcpy(file_name, strtok(NULL, " /"));
+        strcpy(method, strtok(req_line, " /"));
+        strcpy(file_name, strtok(NULL, " /"));
 		strcpy(ct, content_type(file_name));
-		
-		if(strcmp(method, "GET") != 0)
-		{
-				send_error(clnt_write);
-				fclose(clnt_read);
-				fclose(clnt_write);
-				return;
-		}
+
+		if(strcmp(method, "GET")!=0)
+        {
+                send_error(clnt_write);
+                fclose(clnt_read);
+                fclose(clnt_write);
+                return 0;
+        }
 
 		fclose(clnt_read);
 		send_data(clnt_write, ct, file_name);
+		return 0;
 }
 
 void send_data(FILE* fp, char* ct, char* file_name)
