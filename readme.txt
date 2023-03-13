@@ -1,5 +1,5 @@
-it is hanbat collage 2023 capston project
+한밭대학교 4학년 캡스톤 디자인 프로젝트입니다.
 
-project name is HTTPS realization
+https web server을 구현하는게 최종 목표이며
 
-we are consisted of 3 4th student
+3명의 학생들이 캡스톤을 진행합니다.
