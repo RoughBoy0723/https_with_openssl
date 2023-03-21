@@ -3,3 +3,9 @@
 https web server을 구현하는게 최종 목표이며
 
 3명의 학생들이 캡스톤을 진행합니다.
+
+This is a 4th year capstone design project at Hanbat University.
+
+The final goal is to implement an https web server.
+
+Three students will conduct the capstone.
