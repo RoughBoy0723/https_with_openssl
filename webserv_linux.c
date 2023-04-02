@@ -9,7 +9,7 @@
 
 #define BUF_SIZE 1024
 #define SMALL_BUF 100
-
+#define REQ_SIZE 32
 void* request_handler(void* arg);
 void send_data(FILE* fp, char* ct, char* file_name);
 char* content_type(char* file);
@@ -63,9 +63,9 @@ void* request_handler(void *arg)
 		FILE* clnt_read;
 		FILE* clnt_write;
 
-		char method[10];
-		char ct[15];
-		char file_name[30];
+		char method[REQ_SIZE];
+		char ct[REQ_SIZE];
+		char file_name[REQ_SIZE];
 
 		clnt_read = fdopen(clnt_sock, "r");
 		clnt_write = fdopen(dup(clnt_sock), "w");
