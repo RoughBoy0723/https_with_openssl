@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
 				/*서버 소켓에 할당할 정보들*/
         memset(&serv_addr, 0, sizeof(serv_addr));
         serv_addr.sin_family = AF_INET;
-				serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+		serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
         serv_addr.sin_port = htons(atoi(argv[1]));
 
 				/* 빈 서버소켓에 ip와 port 설정*/
@@ -46,11 +46,10 @@ int main(int argc, char *argv[]){
         while(1)
         {
                 clnt_addr_size = sizeof(clnt_addr);
-							
-	              clnt_sock = accept(serv_sock, (struct sockaddr *)&clnt_addr,(socklen_t*)&clnt_addr_size); //클라이언트의 연결을 허용
+	            clnt_sock = accept(serv_sock, (struct sockaddr *)&clnt_addr,(socklen_t*)&clnt_addr_size); //클라이언트의 연결을 허용
 
                 printf("Connection Request : %s:%d\n",
-                                inet_ntoa(clnt_addr.sin_addr), ntohs(clnt_addr.sin_port)); // ip 와 port 를 출력
+                inet_ntoa(clnt_addr.sin_addr), ntohs(clnt_addr.sin_port)); // ip 와 port 를 출력
 					
 								/* 멀티쓰레드를 이용해 동시에 여러클라이언트와 접속*/			
                 pthread_create(&t_id,NULL,request_handler, &clnt_sock); 

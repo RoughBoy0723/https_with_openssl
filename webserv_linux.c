@@ -15,9 +15,8 @@ void send_data(FILE* fp, char* ct, char* file_name);
 char* content_type(char* file);
 void send_error(FILE* fp);
 void error_handling(char* message);
-
-int main(int argc, char *argv[])
-{
+void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, int port);
+int main(int argc, char *argv[]){
 		int serv_sock, clnt_sock;
 		struct sockaddr_in serv_adr;
 		struct sockaddr_in clnt_adr;
@@ -30,20 +29,15 @@ int main(int argc, char *argv[])
 		}
 
 		serv_sock = socket(PF_INET, SOCK_STREAM, 0);
-		memset(&serv_adr, 0, sizeof(serv_adr));
-		serv_adr.sin_family = AF_INET;
-		serv_adr.sin_addr.s_addr=htonl(INADDR_ANY);
-		serv_adr.sin_port = htons(atoi(argv[1]));
-		if(bind(serv_sock, (struct sockaddr*)&serv_adr, sizeof(serv_adr)) == -1)
-				error_handling("bind() error");
-		if(listen(serv_sock, 20) == -1)
-				error_handling("listen() error");
+		if(serv_sock == -1)
+        error_handling("socket() error");
+        
+		bind_and_listen(serv_sock, &serv_adr, 20, atoi(argv[1]));
 
-		while(1)
-		{
+		while(1){
 				clnt_adr_size=sizeof(clnt_adr);
 				clnt_sock=accept(serv_sock, (struct sockaddr*)&clnt_adr, (socklen_t*)&clnt_adr_size);
-				printf("Connection Requset : %s:%d\n", inet_ntoa(clnt_adr.sin_addr), ntohs(clnt_adr.sin_port));
+				printf("Connection Requeset : %s:%d\n", inet_ntoa(clnt_adr.sin_addr), ntohs(clnt_adr.sin_port));
 				pthread_create(&t_id, NULL, request_handler, &clnt_sock);
 				pthread_detach(t_id);
 		}
@@ -51,7 +45,18 @@ int main(int argc, char *argv[])
 		return 0;
 }
 
-void* requset_handler(void *arg)
+void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, int port)
+{
+    memset(serv_adr, 0, sizeof(struct sockaddr_in));
+    serv_adr->sin_family = AF_INET;
+    serv_adr->sin_addr.s_addr = htonl(INADDR_ANY);
+    serv_adr->sin_port = htons(port);
+    if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
+        error_handling("bind() error");
+    if(listen(serv_sock, backlog) == -1)
+        error_handling("listen() error");
+}
+void* request_handler(void *arg)
 {
 		int clnt_sock = *((int*)arg);
 		char req_line[SMALL_BUF];
