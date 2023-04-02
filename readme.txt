@@ -1,5 +1,2 @@
-한밭대학교 4학년 캡스톤 디자인 프로젝트입니다.
-
-https web server을 구현하는게 최종 목표이며
-
-3명의 학생들이 캡스톤을 진행합니다.
+https web server
+in hanbat national university
