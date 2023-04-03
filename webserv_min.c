@@ -22,8 +22,7 @@ int main(int argc, char *argv[]){
 	int serv_sock, clnt_sock;
 	struct sockaddr_in serv_addr, clnt_addr;
 	socklen_t clnt_addr_size;
-	pthread_t t_id;
-
+	
 	if(argc!=2){
 		printf("Usage : %s <port>\n", argv[0]); 
 		return 0;
