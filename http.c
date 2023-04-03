@@ -34,7 +34,7 @@ int error_message(int argc,char *argv[]){
                  return 0;
          }
 }
-void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, int port){	;
+void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, int port){	
 	memset(serv_adr, 0, sizeof(struct sockaddr_in));
 	serv_adr->sin_family = AF_INET;
 	serv_adr->sin_addr.s_addr = htonl(INADDR_ANY);
@@ -47,11 +47,11 @@ void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, i
 void accept_connection(int serv_sock, struct sockaddr_in clnt_addr,int clnt_sock,socklen_t clnt_addr_size){
 	pthread_t t_id;
 	while(1){
-	clnt_addr_size = sizeof(clnt_addr);
-	clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_addr, (socklen_t*)&clnt_addr_size);
-	printf("Connection Request : %s:%d\n",inet_ntoa(clnt_addr.sin_addr), ntohs(clnt_addr.sin_port));
-	pthread_create(&t_id, NULL, request_handler, &clnt_sock);
-	pthread_detach(t_id);
+		clnt_addr_size = sizeof(clnt_addr);
+		clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_addr, (socklen_t*)&clnt_addr_size);
+		printf("Connection Request : %s:%d\n",inet_ntoa(clnt_addr.sin_addr), ntohs(clnt_addr.sin_port));
+		pthread_create(&t_id, NULL, request_handler, &clnt_sock);
+		pthread_detach(t_id);
 	}
 	close(serv_sock);
 }
