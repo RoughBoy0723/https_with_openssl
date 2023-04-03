@@ -143,6 +143,3 @@ void error_handling(char *message){
 	fputc('\n', stderr);
 	return ;
 }
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
