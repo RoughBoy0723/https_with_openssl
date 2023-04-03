@@ -45,10 +45,10 @@ void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, i
 	serv_adr->sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_adr->sin_port = htons(port);
 
-    if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
-    	error_handling("bind() error");
-    if(listen(serv_sock, backlog) == -1)
-    	error_handling("listen() error");
+    	if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
+    		error_handling("bind() error");
+    	if(listen(serv_sock, backlog) == -1)
+    		error_handling("listen() error");
 }
 void accept_connection(int serv_sock, struct sockaddr_in clnt_addr){
 	int clnt_sock;
@@ -139,7 +139,7 @@ void send_error(FILE *fp){
 	char server[]="Server:Linux Web Server\r\n";
 	char cnt_len[]="Content-length:2048\r\n";
 	char cnt_type[]="Content-type:text/html\r\n\r\n";
-	char content[]= "<html><head><title>NETWORK</title><head>""<body><font size+=10><br>¿À·ù ¹ß»ı ¿äÃ» ÆÄÀÏ¸í ¹× ¿äÃ» ¹æ½Ä È®ÀÎ""</font></body></html>";
+	char content[]= "<html><head><title>NETWORK</title><head>""<body><font size+=10><br>ì˜¤ë¥˜ ë°œìƒ ìš”ì²­ íŒŒì¼ëª… ë° ìš”ì²­ ë°©ì‹ í™•ì¸""</font></body></html>";
 
 	fputs(protocol,fp);
 	fputs(server,fp);
