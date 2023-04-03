@@ -39,9 +39,9 @@ void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, i
 	serv_adr->sin_family = AF_INET;
 	serv_adr->sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_adr->sin_port = htons(port);
-   	 if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
+   	if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
     		error_handling("bind() error");
-    	 if(listen(serv_sock, backlog) == -1)
+    	if(listen(serv_sock, backlog) == -1)
     		error_handling("listen() error");
 }
 void accept_connection(int serv_sock, struct sockaddr_in clnt_addr,int clnt_sock,socklen_t clnt_addr_size){
