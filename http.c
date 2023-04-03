@@ -39,10 +39,10 @@ void bind_and_listen(int serv_sock, struct sockaddr_in* serv_adr, int backlog, i
 	serv_adr->sin_family = AF_INET;
 	serv_adr->sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_adr->sin_port = htons(port);
-    if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
-    	error_handling("bind() error");
-    if(listen(serv_sock, backlog) == -1)
-    	error_handling("listen() error");
+   	 if(bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
+    		error_handling("bind() error");
+    	 if(listen(serv_sock, backlog) == -1)
+    		error_handling("listen() error");
 }
 void accept_connection(int serv_sock, struct sockaddr_in clnt_addr,int clnt_sock,socklen_t clnt_addr_size){
 	pthread_t t_id;
@@ -123,7 +123,7 @@ char *content_type(char* file){
 	strtok(file_name, ".");
 	strcpy(extension, strtok(NULL, "."));
 
-		return "text/plain";
+	return "text/plain";
 }
 void send_error(FILE *fp){
 	char protocol[]="HTTP/1.0 400 Bad Request\r\n";
