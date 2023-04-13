@@ -46,9 +46,9 @@ int main(int argc, char* argv[]) {
 /*지정된 포트에 수신 소켓을 설정하고 지정된 백로그 크기의 수신 연결*/
 void setup_listening_socket(int serv_sock, struct sockaddr_in* serv_adr, int backlog, int port) {
 	memset(serv_adr, 0, sizeof(struct sockaddr_in));
-	serv_adr.sin_family = AF_INET;
-	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_adr.sin_port = htons(port);
+	serv_adr->sin_family = AF_INET;
+	serv_adr->sin_addr.s_addr = htonl(INADDR_ANY);
+	serv_adr->sin_port = htons(port);
 
 	if (bind(serv_sock, (struct sockaddr*)serv_adr, sizeof(struct sockaddr_in)) == -1)
 		error_handling("bind() error");
