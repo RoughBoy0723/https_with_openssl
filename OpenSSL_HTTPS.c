@@ -31,7 +31,6 @@ int main(int argc,char *argv[]) {
 	int serv_sock;
 	struct sockaddr_in serv_addr, clnt_addr;
 	SSL *ssl;
-	X509 *cert;
 
 	setupServerCtx();
 
