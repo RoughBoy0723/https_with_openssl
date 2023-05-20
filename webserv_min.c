@@ -21,13 +21,7 @@ void accept_connection(int serv_sock, struct sockaddr_in clnt_addr);
 int main(int argc, char *argv[]){
 	int serv_sock, clnt_sock;
 	struct sockaddr_in serv_addr, clnt_addr;
-	socklen_t clnt_addr_size;
-	pthread_t t_id;
 
-	if(argc!=2){
-		printf("Usage : %s <port>\n", argv[0]); 
-		return 0;
-	}
 
 	if( (serv_sock = socket(PF_INET, SOCK_STREAM, 0))== -1)
 		error_handling("socket() error");
@@ -102,7 +96,7 @@ void send_data(FILE * fp, char* ct, char*file_name){
 	char buf[BUFF_SIZE];
 	FILE* send_file;  
 
-	sprintf(cnt_type, "Content-type :%s\r\n\r\n", ct);  
+	sprintf(cnt_type, "Content-type :%s\r\n\r\n", ct); //slowloris  
 	send_file = fopen(file_name, "r"); 
 	if(send_file == NULL){
 		send_error(fp); 

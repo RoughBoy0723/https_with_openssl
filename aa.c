@@ -9,10 +9,10 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
-#define IP_ADDR "127.0.0.1"
-#define PORT_NUM 5992
-#define CERT_FILE "cert.pem"
-#define KEY_FILE "key.pem"
+#define ip "203.230.102.41"
+#define PORT_NUM 443
+#define CERT_FILE "cert1.pem"
+#define KEY_FILE "privkey1.pem"
 
 int main() {
     int listen_fd;
@@ -48,7 +48,7 @@ int main() {
     // set server address
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = inet_addr(IP_ADDR);
+    server_addr.sin_addr.s_addr = inet_addr(ip);
     server_addr.sin_port = htons(PORT_NUM);
 
     // bind socket
