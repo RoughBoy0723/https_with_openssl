@@ -168,6 +168,7 @@ char* content_type(char* file) {
 	else
 		return "text/plain";
 }
+
 void send_error(SSL* ssl) {
 	char protocol[] = "HTTP/1.0 400 Bad Request\r\n";
 	char server[] = "Server:Linux Web Server\r\n";
