@@ -10,7 +10,7 @@
 #include <openssl/err.h>
 
 #define IP_ADDR "127.0.0.1"
-#define PORT_NUM 5992
+#define PORT_NUM 8080
 #define CERT_FILE "cert.pem"
 #define KEY_FILE "key.pem"
 #define MAX 1024
@@ -36,7 +36,7 @@ int main(int argc,char *argv[]) {
 
 	//socket
 	serv_sock = socket(PF_INET, SOCK_STREAM, 0);
-	bind_and_listen(serv_sock, &serv_addr, 20, atoi(argv[1]));
+	bind_and_listen(serv_sock, &serv_addr, 20, PORT_NUM);
 
 	while (1) {
 		accept_connection(serv_sock, clnt_addr);
@@ -182,6 +182,7 @@ void send_error(SSL* ssl) {
 	SSL_write(ssl, cnt_type, strlen(cnt_type));
 	SSL_write(ssl, content, strlen(content));
 }
+
 void error_handling(char* message) {
 	fputs(message, stderr);
 	fputc('\n', stderr);
